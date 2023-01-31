@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Format Your Text</string>
+    <string name="text_for_formatting">Что надо отформатировать: </string>
+    <string name="result">Результат: </string>
+    <string name="settings">Настройки: </string>
+</resources>
