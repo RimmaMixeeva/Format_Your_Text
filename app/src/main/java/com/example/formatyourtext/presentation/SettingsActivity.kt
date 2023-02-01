@@ -1,4 +1,4 @@
-package com.example.formatyourtext
+package com.example.formatyourtext.presentation
 
 
 import android.content.Intent
@@ -8,14 +8,10 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ExperimentalGraphicsApi
@@ -23,6 +19,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
+import com.example.formatyourtext.presentation.fragments.ItemRowSample
+import com.example.formatyourtext.R
+import com.example.formatyourtext.domain.entity.ItemSettingsRowModel
 
 
 class SettingsActivity : ComponentActivity() {
@@ -51,7 +50,7 @@ class SettingsActivity : ComponentActivity() {
                         .padding(bottom = 20.dp),
                     fontSize = 5.em
                 )
-                LazyColumn() {
+                LazyColumn {
                     itemsIndexed(
                         listOf(
                         ItemSettingsRowModel("Замена дефиса на тире","-Пример", "—Пример"),

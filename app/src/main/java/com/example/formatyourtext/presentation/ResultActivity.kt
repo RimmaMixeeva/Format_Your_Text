@@ -1,4 +1,4 @@
-package com.example.formatyourtext
+package com.example.formatyourtext.presentation
 
 
 import android.content.Intent
@@ -20,6 +20,8 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
+import com.example.formatyourtext.R
+import com.example.formatyourtext.presentation.fragments.Wallpaper
 import androidx.compose.material.TextField as TextField
 
 class ResultActivity : ComponentActivity() {
@@ -31,7 +33,9 @@ class ResultActivity : ComponentActivity() {
         setContent {
             val clipboardManager: androidx.compose.ui.platform.ClipboardManager = LocalClipboardManager.current
             val text = intent.getStringExtra("text").toString().replace("-"," — ")
+
             Wallpaper(itemId = R.drawable.wallpaper3)
+
             Column(
                 modifier = Modifier
                     .background(Color.hsl(0.35F, 0.45F, 0.82F, 0.6F))
@@ -87,15 +91,4 @@ class ResultActivity : ComponentActivity() {
             }
         }
     }
-
-    private fun formatText(text: String) : String {
-        var result =  text.replace(Regex("-")) {
-            when(it.value) {
-                "-" -> "—"
-                else -> it.value
-            }
-        }
-        return result
-    }
-
 }

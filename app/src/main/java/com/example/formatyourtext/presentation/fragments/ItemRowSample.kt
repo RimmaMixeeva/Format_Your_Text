@@ -1,4 +1,4 @@
-package com.example.formatyourtext
+package com.example.formatyourtext.presentation.fragments
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -16,11 +16,12 @@ import androidx.compose.ui.graphics.ExperimentalGraphicsApi
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
+import com.example.formatyourtext.domain.entity.ItemSettingsRowModel
 
 @OptIn(ExperimentalGraphicsApi::class)
 @Composable
 fun ItemRowSample(item: ItemSettingsRowModel) {
-    var isExpanded = remember { mutableStateOf(false) }
+    val isExpanded = remember { mutableStateOf(false) }
     val checkedState = remember { mutableStateOf(false) }
     Card(
         elevation = 3.dp,

@@ -1,10 +1,9 @@
-package com.example.formatyourtext
+package com.example.formatyourtext.presentation
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
@@ -12,15 +11,14 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color.Companion.hsl
 import androidx.compose.ui.graphics.ExperimentalGraphicsApi
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
+import com.example.formatyourtext.R
+import com.example.formatyourtext.presentation.fragments.Wallpaper
 
 class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalGraphicsApi::class)
@@ -30,7 +28,9 @@ class MainActivity : ComponentActivity() {
             var text by remember {
                 mutableStateOf("")
             }
+
           Wallpaper(itemId = R.drawable.wallpaper3)
+
             Column(
                 modifier = Modifier
                     .background(hsl(0.35F, 0.45F, 0.82F, 0.6F))
