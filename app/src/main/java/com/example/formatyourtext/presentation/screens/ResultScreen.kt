@@ -1,15 +1,18 @@
 package com.example.formatyourtext.presentation.screens
 
+import android.view.Gravity
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Settings
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ExperimentalGraphicsApi
 import androidx.compose.ui.platform.LocalClipboardManager
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.style.TextAlign
@@ -23,7 +26,10 @@ import com.example.formatyourtext.presentation.components.Wallpaper
 @OptIn(ExperimentalGraphicsApi::class)
 @Composable
 fun ResultScreen(navController: NavController, text: String) {
-
+    val context = LocalContext.current
+    var text by remember {
+        mutableStateOf(text)
+    }
     val clipboardManager: androidx.compose.ui.platform.ClipboardManager =
         LocalClipboardManager.current
     Wallpaper(itemId = R.drawable.wallpaper3)
@@ -53,7 +59,7 @@ fun ResultScreen(navController: NavController, text: String) {
         )
         TextField(
             value = text,
-            onValueChange = {},
+            onValueChange = {newText-> text = newText},
             modifier = Modifier
                 .fillMaxWidth()
                 .fillMaxHeight(0.8F)
@@ -67,6 +73,9 @@ fun ResultScreen(navController: NavController, text: String) {
             Button(
                 onClick = {
                     clipboardManager.setText(AnnotatedString((text)))
+                    val toast = Toast.makeText(context, "Текст скопирован", Toast.LENGTH_SHORT)
+                    toast.setGravity(Gravity.CENTER, 0, 0)
+                    toast.show()
                 },
                 modifier = Modifier
                     .padding(vertical = 20.dp),
