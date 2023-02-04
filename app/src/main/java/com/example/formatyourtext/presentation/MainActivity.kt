@@ -17,62 +17,20 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.formatyourtext.R
 import com.example.formatyourtext.presentation.components.Wallpaper
+import com.example.formatyourtext.presentation.screens.MainScreen
 
 class MainActivity : ComponentActivity() {
-    @OptIn(ExperimentalGraphicsApi::class)
+    lateinit var navController: NavHostController
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            var text by remember {
-                mutableStateOf("")
-            }
-
-          Wallpaper(itemId = R.drawable.wallpaper3)
-
-            Column(
-                modifier = Modifier
-                    .background(hsl(0.35F, 0.45F, 0.82F, 0.6F))
-                    .fillMaxSize()
-            )
-            {
-                IconButton(onClick = {
-                    val intent = Intent(this@MainActivity, SettingsActivity::class.java)
-                    startActivity(intent)
-                    overridePendingTransition(0,0)
-                    })
-                {
-                    Icon(Icons.Filled.Settings, contentDescription = "Настройки")
-                }
-                Text(
-                    text = stringResource(R.string.text_for_formatting),
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(bottom = 20.dp),
-                    fontSize = 5.em
-                )
-                TextField(
-                    value = text,
-                    onValueChange = { newText -> text = newText },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .fillMaxHeight(0.8F)
-                        .padding(horizontal = 20.dp)
-                )
-                Button(
-                    onClick = {val intent = Intent(this@MainActivity, ResultActivity::class.java)
-                               intent.putExtra("text", text)
-                               startActivity(intent)
-                        overridePendingTransition(0,0)},
-                    modifier = Modifier
-                        .padding(horizontal = 80.dp, vertical = 20.dp),
-                ) {
-                    Text ("Форматировать", fontSize = 5.em)
-                  }
-
-        }
+            navController = rememberNavController()
+            SetUpNavGraph(navController = navController)
     }
 }
 }
