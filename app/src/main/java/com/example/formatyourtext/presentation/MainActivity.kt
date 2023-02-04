@@ -18,7 +18,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import com.example.formatyourtext.R
-import com.example.formatyourtext.presentation.fragments.Wallpaper
+import com.example.formatyourtext.presentation.components.Wallpaper
 
 class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalGraphicsApi::class)
@@ -61,7 +61,6 @@ class MainActivity : ComponentActivity() {
                         .fillMaxHeight(0.8F)
                         .padding(horizontal = 20.dp)
                 )
-
                 Button(
                     onClick = {val intent = Intent(this@MainActivity, ResultActivity::class.java)
                                intent.putExtra("text", text)
@@ -72,10 +71,8 @@ class MainActivity : ComponentActivity() {
                 ) {
                     Text ("Форматировать", fontSize = 5.em)
                   }
+
         }
     }
-
-
 }
-
 }

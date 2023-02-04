@@ -1,4 +1,4 @@
-package com.example.formatyourtext.presentation.fragments
+package com.example.formatyourtext.presentation.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.fillMaxSize

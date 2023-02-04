@@ -21,7 +21,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import com.example.formatyourtext.R
-import com.example.formatyourtext.presentation.fragments.Wallpaper
+import com.example.formatyourtext.presentation.components.Wallpaper
 import androidx.compose.material.TextField as TextField
 
 class ResultActivity : ComponentActivity() {

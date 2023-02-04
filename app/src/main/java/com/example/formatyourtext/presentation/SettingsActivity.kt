@@ -19,7 +19,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
-import com.example.formatyourtext.presentation.fragments.ItemRowSample
+import com.example.formatyourtext.presentation.components.ItemRowSample
 import com.example.formatyourtext.R
 import com.example.formatyourtext.domain.entity.ItemSettingsRowModel
 
