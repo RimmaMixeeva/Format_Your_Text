@@ -6,23 +6,33 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForward
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ExperimentalGraphicsApi
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
+import com.example.formatyourtext.data.DataStoreManager
 import com.example.formatyourtext.domain.entity.ItemSettingsRowModel
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalGraphicsApi::class)
 @Composable
-fun ItemRowSample(item: ItemSettingsRowModel) {
-    val isExpanded = remember { mutableStateOf(false) }
-    val checkedState = remember { mutableStateOf(false) }
+fun ItemRowSample(itemNumber: Int, item: ItemSettingsRowModel) {
+    //context
+    val context = LocalContext.current
+    //scope
+    val scope = rememberCoroutineScope()
+    //datastore info
+    val dataStore = DataStoreManager(context)
+    //get saved state of setting
+    val savedSetting = dataStore.getSetting(itemNumber).collectAsState(initial = false)
+
+    val isExpanded = remember { mutableStateOf(savedSetting.value)}
+    //val checkedState = remember { mutableStateOf(savedSetting.value)}
     Card(
         elevation = 3.dp,
         backgroundColor = Color.hsl(0.32F, 0.20F, 0.89F, 0.9F),
@@ -36,13 +46,17 @@ fun ItemRowSample(item: ItemSettingsRowModel) {
                     .clickable { isExpanded.value = !isExpanded.value }
             ) {
                 Switch(
-                    checked = checkedState.value,
-                    onCheckedChange = { checkedState.value = it },
+                    checked = savedSetting.value,
+                    onCheckedChange = {
+                                      scope.launch { dataStore.setSetting(itemNumber, it) }},
                     modifier = Modifier.padding(start = 8.dp)
                 )
                 Text(
                     text = item.settingName,
-                    modifier = Modifier.padding(vertical = 12.dp, horizontal  = 5.dp).fillMaxWidth(),
+                    //text = savedSetting.value.toString(),
+                    modifier = Modifier
+                        .padding(vertical = 12.dp, horizontal = 5.dp)
+                        .fillMaxWidth(),
                     fontSize = 4.em,
                     textAlign = TextAlign.Start
                 )
