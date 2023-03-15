@@ -15,9 +15,11 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
-import com.example.formatyourtext.data.DataStoreManager
+import androidx.datastore.preferences.core.Preferences
+import com.example.formatyourtext.data.dataStore.DataStoreManager
 import com.example.formatyourtext.domain.entity.ItemSettingsRowModel
 import kotlinx.coroutines.launch
+
 
 @OptIn(ExperimentalGraphicsApi::class)
 @Composable
@@ -28,10 +30,12 @@ fun ItemRowSample(itemNumber: Int, item: ItemSettingsRowModel) {
     val scope = rememberCoroutineScope()
     //datastore info
     val dataStore = DataStoreManager(context)
+    val savedSetting = remember { mutableStateOf(false) }
     //get saved state of setting
-    val savedSetting = dataStore.getSetting(itemNumber).collectAsState(initial = false)
-
-    val isExpanded = remember { mutableStateOf(savedSetting.value)}
+     LaunchedEffect(scope) {
+         savedSetting.value = dataStore.getSetting(itemNumber)
+    }
+    val isExpanded = remember { mutableStateOf(false)}
     //val checkedState = remember { mutableStateOf(savedSetting.value)}
     Card(
         elevation = 3.dp,
@@ -43,17 +47,18 @@ fun ItemRowSample(itemNumber: Int, item: ItemSettingsRowModel) {
                 horizontalArrangement = Arrangement.SpaceBetween,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .clickable { isExpanded.value = !isExpanded.value }
+                    .clickable { isExpanded.value = !isExpanded.value}
             ) {
                 Switch(
                     checked = savedSetting.value,
                     onCheckedChange = {
-                                      scope.launch { dataStore.setSetting(itemNumber, it) }},
+                                      scope.launch { dataStore.setSetting(itemNumber, it) }
+                                      savedSetting.value = it
+                                      },
                     modifier = Modifier.padding(start = 8.dp)
                 )
                 Text(
-                    text = item.settingName,
-                    //text = savedSetting.value.toString(),
+                    text = savedSetting.value.toString() + item.settingName,
                     modifier = Modifier
                         .padding(vertical = 12.dp, horizontal = 5.dp)
                         .fillMaxWidth(),

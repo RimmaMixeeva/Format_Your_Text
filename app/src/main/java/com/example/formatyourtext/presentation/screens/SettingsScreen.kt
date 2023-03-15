@@ -1,8 +1,5 @@
 package com.example.formatyourtext.presentation.screens
 
-import android.content.Context
-import android.content.Intent
-import android.os.storage.StorageManager
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -16,28 +13,22 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ExperimentalGraphicsApi
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
-import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.navigation.NavController
 import com.example.formatyourtext.R
-import com.example.formatyourtext.data.DataStoreManager
-import com.example.formatyourtext.domain.entity.ItemSettingsRowModel
-import com.example.formatyourtext.presentation.MainActivity
+import com.example.formatyourtext.domain.entity.SettingsStorage
 import com.example.formatyourtext.presentation.components.ItemRowSample
 
 
 @OptIn(ExperimentalGraphicsApi::class)
 @Composable
 fun SettingsScreen(navController: NavController) {
-
     Column(
         modifier = Modifier
             .background(Color.hsl(0.35F, 0.45F, 0.82F, 0.6F))
@@ -59,19 +50,7 @@ fun SettingsScreen(navController: NavController) {
         )
         LazyColumn {
             itemsIndexed(
-                listOf(
-                    ItemSettingsRowModel("Замена дефиса на тире", "-Пример", "—Пример"),
-                    ItemSettingsRowModel(
-                        "Поставить, если нету, пробел после . ? ! !? ",
-                        "...мера!Он",
-                        "...мера! Он"
-                    ),
-                    ItemSettingsRowModel(
-                        "Поставить, если нету, пробел после тире (—)",
-                        "—Пример",
-                        "— Пример"
-                    )
-                )
+                SettingsStorage.getInstance().rowSettingRowModelList.toList()
             )
             { index, item ->
                 ItemRowSample(index, item = item)

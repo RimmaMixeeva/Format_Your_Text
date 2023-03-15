@@ -27,6 +27,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.formatyourtext.R
+import com.example.formatyourtext.domain.useCase.fillSettingStorage
 import com.example.formatyourtext.presentation.components.Wallpaper
 import com.example.formatyourtext.presentation.screens.MainScreen
 
@@ -34,6 +35,7 @@ class MainActivity : ComponentActivity() {
     lateinit var navController: NavHostController
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        fillSettingStorage()
         setContent {
             navController = rememberNavController()
             SetUpNavGraph(navController = navController)
