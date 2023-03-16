@@ -1,6 +1,6 @@
 package com.example.formatyourtext.presentation.screens
 
-import android.util.Log
+
 import android.view.Gravity
 import android.widget.Toast
 import androidx.compose.foundation.background
@@ -11,7 +11,6 @@ import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ExperimentalGraphicsApi
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -21,23 +20,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.navigation.NavController
 import com.example.formatyourtext.R
-import com.example.formatyourtext.domain.entity.SettingsStorage
 import com.example.formatyourtext.domain.entity.TextStorage
-import com.example.formatyourtext.domain.useCase.handleText
 import com.example.formatyourtext.presentation.components.Wallpaper
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
 
-
-@OptIn(ExperimentalGraphicsApi::class)
 @Composable
 fun ResultScreen(navController: NavController, text: String) {
     val context = LocalContext.current
 
-    //var text by remember { mutableStateOf(TextStorage.getInstance().text) }
-    var text by remember { mutableStateOf(TextStorage.getInstance().text) }
+    var text by remember { mutableStateOf(TextStorage.text) }
 
     val clipboardManager: androidx.compose.ui.platform.ClipboardManager =
         LocalClipboardManager.current
@@ -53,8 +43,8 @@ fun ResultScreen(navController: NavController, text: String) {
             navController.navigate(Screen.Settings.route) {
                 popUpTo(Screen.Result.route) {
                     inclusive = false
-                } //куда перебросить стрелка назад, когда тебя уже перебросят по адресу
-            }                              // в нашем случае возврат со страницы Settings
+                }
+            }
         }) {
             Icon(Icons.Filled.Settings, contentDescription = "Настройки")
         }

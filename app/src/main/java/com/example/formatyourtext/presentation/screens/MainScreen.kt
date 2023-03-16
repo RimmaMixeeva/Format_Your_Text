@@ -10,33 +10,26 @@ import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color.Companion.hsl
-import androidx.compose.ui.graphics.ExperimentalGraphicsApi
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.navigation.NavController
 import com.example.formatyourtext.R
-import com.example.formatyourtext.domain.entity.SettingsStorage
 import com.example.formatyourtext.domain.entity.TextStorage
-import com.example.formatyourtext.domain.useCase.fillSettingStorage
 import com.example.formatyourtext.domain.useCase.handleText
 import com.example.formatyourtext.presentation.components.Wallpaper
 import kotlinx.coroutines.*
 
-@OptIn(ExperimentalGraphicsApi::class)
 @Composable
 fun MainScreen(navController: NavController) {
-    //storage
-    val storage = SettingsStorage.getInstance()
     val scope = CoroutineScope(Dispatchers.Default)
     val clipboardManager: androidx.compose.ui.platform.ClipboardManager =
         LocalClipboardManager.current
     var text by remember {
-        mutableStateOf(TextStorage.getInstance().text)
+        mutableStateOf(TextStorage.text)
     }
     val context = LocalContext.current
 
@@ -65,7 +58,7 @@ fun MainScreen(navController: NavController) {
         TextField(
             value = text,
             onValueChange = { newText -> text = newText
-                              TextStorage.getInstance().setNewText(newText)},
+                              TextStorage.setNewText(newText)},
             modifier = Modifier
                 .fillMaxWidth()
                 .fillMaxHeight(0.8F)
@@ -81,7 +74,7 @@ fun MainScreen(navController: NavController) {
             Button(
                 onClick = {
                     text += clipboardManager.getText()
-                    TextStorage.getInstance().setNewText(text)
+                    TextStorage.setNewText(text)
                 }
             ) {
                 Text("Вставить", fontSize = 3.em)
@@ -89,7 +82,7 @@ fun MainScreen(navController: NavController) {
             Button(
                 onClick = {
                    text = ""
-                   TextStorage.getInstance().setNewText(text)
+                   TextStorage.setNewText(text)
                 }
             ) {
                 Text("Очистить", fontSize = 3.em)
@@ -97,7 +90,7 @@ fun MainScreen(navController: NavController) {
             Button(
                 onClick = {
                     if (text!="") {
-                        TextStorage.getInstance().setNewText(text)
+                        TextStorage.setNewText(text)
                         scope.launch {
                             async { handleText(text, context, scope) }.await()
                             withContext(Dispatchers.Main) {

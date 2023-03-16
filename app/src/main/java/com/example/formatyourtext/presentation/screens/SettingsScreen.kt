@@ -15,7 +15,6 @@ import androidx.compose.material.icons.filled.Home
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ExperimentalGraphicsApi
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -26,7 +25,6 @@ import com.example.formatyourtext.domain.entity.SettingsStorage
 import com.example.formatyourtext.presentation.components.ItemRowSample
 
 
-@OptIn(ExperimentalGraphicsApi::class)
 @Composable
 fun SettingsScreen(navController: NavController) {
     Column(
@@ -50,7 +48,7 @@ fun SettingsScreen(navController: NavController) {
         )
         LazyColumn {
             itemsIndexed(
-                SettingsStorage.getInstance().rowSettingRowModelList.toList()
+                SettingsStorage.rowSettingRowModelList.toList()
             )
             { index, item ->
                 ItemRowSample(index, item = item)

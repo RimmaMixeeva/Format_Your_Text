@@ -10,18 +10,14 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ExperimentalGraphicsApi
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
-import androidx.datastore.preferences.core.Preferences
 import com.example.formatyourtext.data.dataStore.DataStoreManager
 import com.example.formatyourtext.domain.entity.ItemSettingsRowModel
 import kotlinx.coroutines.launch
 
-
-@OptIn(ExperimentalGraphicsApi::class)
 @Composable
 fun ItemRowSample(itemNumber: Int, item: ItemSettingsRowModel) {
     //context
