@@ -4,7 +4,6 @@ import com.example.formatyourtext.domain.entity.ItemSettingsRowModel
 import com.example.formatyourtext.domain.entity.SettingsStorage
 
 fun fillSettingStorage() {
-    //val storage = SettingsStorage.getInstance()
     SettingsStorage.addRowSettingRowModel(
         ItemSettingsRowModel(0,
             "Замена дефиса на тире",

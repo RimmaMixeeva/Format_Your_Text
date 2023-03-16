@@ -24,7 +24,7 @@ import com.example.formatyourtext.domain.entity.TextStorage
 import com.example.formatyourtext.presentation.components.Wallpaper
 
 @Composable
-fun ResultScreen(navController: NavController, text: String) {
+fun ResultScreen(navController: NavController) {
     val context = LocalContext.current
 
     var text by remember { mutableStateOf(TextStorage.text) }

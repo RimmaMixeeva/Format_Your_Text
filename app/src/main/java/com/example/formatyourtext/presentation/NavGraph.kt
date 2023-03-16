@@ -22,15 +22,8 @@ fun SetUpNavGraph(
           MainScreen(navController)
       }
       composable(
-          route = Screen.Result.route + "/{text}",
-          arguments = listOf(
-              navArgument("text"){
-                  type = NavType.StringType
-                  nullable = false
-              })
-
-      ) { entry ->
-          entry.arguments?.getString("text")?.let { ResultScreen(navController, text = it) }
+          route = Screen.Result.route
+      ) { ResultScreen(navController)
       }
       composable(
           route = Screen.Settings.route

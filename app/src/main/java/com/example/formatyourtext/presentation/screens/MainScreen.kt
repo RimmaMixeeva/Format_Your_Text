@@ -92,9 +92,9 @@ fun MainScreen(navController: NavController) {
                     if (text!="") {
                         TextStorage.setNewText(text)
                         scope.launch {
-                            async { handleText(text, context, scope) }.await()
+                            async { handleText(context, scope) }.await()
                             withContext(Dispatchers.Main) {
-                                navController.navigate(Screen.Result.route + "/" + "some result")
+                                navController.navigate(Screen.Result.route)
                             }
                         }
                     }
