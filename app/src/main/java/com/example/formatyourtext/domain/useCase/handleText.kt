@@ -6,16 +6,14 @@ import com.example.formatyourtext.domain.entity.SettingsStorage
 import com.example.formatyourtext.domain.entity.TextStorage
 import kotlinx.coroutines.*
 
-suspend fun handleText(context: Context, scope: CoroutineScope): String {
+suspend fun handleText(context: Context): String {
     var storageList = SettingsStorage.rowSettingRowModelList
     val dataStore = DataStoreManager(context)
-    scope.launch(CoroutineName("transform text coroutine")) {
         for (item in storageList) {
                 var savedSetting = dataStore.getSetting(item.id)
                 if (savedSetting) {
                     transformThroughRegex(item.id)
                 }
             }
-        }
     return TextStorage.text
 }
