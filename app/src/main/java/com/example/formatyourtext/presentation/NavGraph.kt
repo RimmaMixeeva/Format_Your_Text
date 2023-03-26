@@ -10,20 +10,22 @@ import com.example.formatyourtext.presentation.screens.MainScreen
 import com.example.formatyourtext.presentation.screens.ResultScreen
 import com.example.formatyourtext.presentation.screens.Screen
 import com.example.formatyourtext.presentation.screens.SettingsScreen
+import com.example.formatyourtext.presentation.viewModel.MainViewModel
 
 @Composable
 fun SetUpNavGraph(
-    navController: NavHostController
+    navController: NavHostController,
+    viewModel: MainViewModel
 ) {
   NavHost(navController = navController , startDestination = Screen.Main.route) {
       composable(
           route = Screen.Main.route
       ) {
-          MainScreen(navController)
+          MainScreen(navController, viewModel)
       }
       composable(
           route = Screen.Result.route
-      ) { ResultScreen(navController)
+      ) { ResultScreen(navController, viewModel)
       }
       composable(
           route = Screen.Settings.route

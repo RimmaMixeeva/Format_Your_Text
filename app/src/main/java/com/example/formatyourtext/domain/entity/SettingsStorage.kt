@@ -2,7 +2,12 @@ package com.example.formatyourtext.domain.entity
 
 object SettingsStorage {
     val rowSettingRowModelList = mutableListOf<ItemSettingsRowModel>()
-    fun addRowSettingRowModel(item: ItemSettingsRowModel) {
-        rowSettingRowModelList.add(item)
+    fun addRowSettingRowModels(items: ArrayList<ItemSettingsRowModel>) {
+        if (rowSettingRowModelList.size==0) {
+            for (each in items) {
+                rowSettingRowModelList.add(each)
+            }
+        }
+
     }
 }

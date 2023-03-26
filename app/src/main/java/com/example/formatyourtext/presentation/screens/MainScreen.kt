@@ -2,6 +2,7 @@ package com.example.formatyourtext.presentation.screens
 
 import android.view.Gravity
 import android.widget.Toast
+import androidx.activity.ComponentActivity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
@@ -18,20 +19,22 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.navigation.NavController
 import com.example.formatyourtext.R
-import com.example.formatyourtext.domain.entity.TextStorage
-import com.example.formatyourtext.domain.useCase.handleText
 import com.example.formatyourtext.presentation.components.Wallpaper
-import kotlinx.coroutines.*
+import com.example.formatyourtext.presentation.viewModel.MainViewModel
 
 @Composable
-fun MainScreen(navController: NavController) {
-    val scope = CoroutineScope(Dispatchers.Default)
+fun MainScreen(navController: NavController, mainViewModel: MainViewModel) {
+
+    val mainScreenContext = LocalContext.current
     val clipboardManager: androidx.compose.ui.platform.ClipboardManager =
         LocalClipboardManager.current
+
     var text by remember {
-        mutableStateOf(TextStorage.text)
+        mutableStateOf(mainViewModel.liveText.value ?: "")
     }
-    val context = LocalContext.current
+    mainViewModel.liveText.observe(LocalContext.current as ComponentActivity) {
+        text = it
+    }
 
     Wallpaper(itemId = R.drawable.wallpaper3)
 
@@ -57,8 +60,7 @@ fun MainScreen(navController: NavController) {
         )
         TextField(
             value = text,
-            onValueChange = { newText -> text = newText
-                              TextStorage.setNewText(newText)},
+            onValueChange = { newText -> mainViewModel.setNewText(newText) },
             modifier = Modifier
                 .fillMaxWidth()
                 .fillMaxHeight(0.8F)
@@ -73,33 +75,26 @@ fun MainScreen(navController: NavController) {
         ) {
             Button(
                 onClick = {
-                    text += clipboardManager.getText()
-                    TextStorage.setNewText(text)
+                    mainViewModel.setNewText(text + clipboardManager.getText())
                 }
             ) {
                 Text("Вставить", fontSize = 3.em)
             }
             Button(
                 onClick = {
-                   text = ""
-                   TextStorage.setNewText(text)
+                    mainViewModel.setNewText("")
                 }
             ) {
                 Text("Очистить", fontSize = 3.em)
             }
+
             Button(
                 onClick = {
-                    if (text!="") {
-                        TextStorage.setNewText(text)
-                        scope.launch {
-                            handleText(context)
-                            withContext(Dispatchers.Main) {
-                                navController.navigate(Screen.Result.route)
-                            }
-                        }
-                    }
-                    else {
-                        val toast = Toast.makeText(context, "Заполните пустое поле", Toast.LENGTH_SHORT)
+                    if ((mainViewModel.liveText.value ?: "").isNotBlank()) {
+                        mainViewModel.formatText(navController, mainScreenContext)
+                    } else {
+                        val toast =
+                            Toast.makeText(mainScreenContext, "Заполните пустое поле", Toast.LENGTH_SHORT)
                         toast.setGravity(Gravity.CENTER, 0, 0)
                         toast.show()
                     }

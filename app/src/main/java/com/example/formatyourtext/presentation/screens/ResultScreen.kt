@@ -20,14 +20,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.navigation.NavController
 import com.example.formatyourtext.R
-import com.example.formatyourtext.domain.entity.TextStorage
 import com.example.formatyourtext.presentation.components.Wallpaper
+import com.example.formatyourtext.presentation.viewModel.MainViewModel
 
 @Composable
-fun ResultScreen(navController: NavController) {
+fun ResultScreen(navController: NavController, viewModel: MainViewModel) {
     val context = LocalContext.current
-
-    var text by remember { mutableStateOf(TextStorage.text) }
+    var text by remember { mutableStateOf(viewModel.liveText.value?:"") }
 
     val clipboardManager: androidx.compose.ui.platform.ClipboardManager =
         LocalClipboardManager.current
