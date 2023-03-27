@@ -91,10 +91,14 @@ fun MainScreen(navController: NavController, mainViewModel: MainViewModel) {
             Button(
                 onClick = {
                     if ((mainViewModel.liveText.value ?: "").isNotBlank()) {
-                        mainViewModel.formatText(navController, mainScreenContext)
+                        mainViewModel.formatText(navController, mainScreenContext, mainViewModel)
                     } else {
                         val toast =
-                            Toast.makeText(mainScreenContext, "Заполните пустое поле", Toast.LENGTH_SHORT)
+                            Toast.makeText(
+                                mainScreenContext,
+                                "Заполните пустое поле",
+                                Toast.LENGTH_SHORT
+                            )
                         toast.setGravity(Gravity.CENTER, 0, 0)
                         toast.show()
                     }

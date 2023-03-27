@@ -26,7 +26,7 @@ import com.example.formatyourtext.presentation.viewModel.MainViewModel
 @Composable
 fun ResultScreen(navController: NavController, viewModel: MainViewModel) {
     val context = LocalContext.current
-    var text by remember { mutableStateOf(viewModel.liveText.value?:"") }
+    var text by remember { mutableStateOf(viewModel.liveText.value ?: "") }
 
     val clipboardManager: androidx.compose.ui.platform.ClipboardManager =
         LocalClipboardManager.current

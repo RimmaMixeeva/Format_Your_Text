@@ -6,5 +6,5 @@ data class ItemSettingsRowModel (
     val exampleBefore: String,
     val exampleAfter: String,
     val regexBefore: Regex,
-    val regexAfter: String
+    val regexAfter: Regex
     )

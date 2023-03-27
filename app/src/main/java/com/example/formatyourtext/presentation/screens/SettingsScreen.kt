@@ -12,7 +12,7 @@ import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
@@ -27,6 +27,7 @@ import com.example.formatyourtext.presentation.components.ItemRowSample
 
 @Composable
 fun SettingsScreen(navController: NavController) {
+
     Column(
         modifier = Modifier
             .background(Color.hsl(0.35F, 0.45F, 0.82F, 0.6F))

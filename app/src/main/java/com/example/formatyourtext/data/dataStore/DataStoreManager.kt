@@ -7,7 +7,6 @@ import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.runBlocking
 
 class DataStoreManager(private val context: Context) {
 
@@ -27,9 +26,6 @@ class DataStoreManager(private val context: Context) {
             pref[createSettingKeyName(settingNumber)] = isOn
         }
     }
-
-    val exampleData = runBlocking { context.dataStore.data.first() }
-
 
     suspend fun getSetting(settingNumber: Int): Boolean = context.dataStore.data
         .filter { pref ->

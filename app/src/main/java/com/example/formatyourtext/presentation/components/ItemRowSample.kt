@@ -28,10 +28,10 @@ fun ItemRowSample(itemNumber: Int, item: ItemSettingsRowModel) {
     val dataStore = DataStoreManager(context)
     val savedSetting = remember { mutableStateOf(false) }
     //get saved state of setting
-     LaunchedEffect(scope) {
-         savedSetting.value = dataStore.getSetting(itemNumber)
+    LaunchedEffect(scope) {
+        savedSetting.value = dataStore.getSetting(itemNumber)
     }
-    val isExpanded = remember { mutableStateOf(false)}
+    val isExpanded = remember { mutableStateOf(false) }
     //val checkedState = remember { mutableStateOf(savedSetting.value)}
     Card(
         elevation = 3.dp,
@@ -43,18 +43,18 @@ fun ItemRowSample(itemNumber: Int, item: ItemSettingsRowModel) {
                 horizontalArrangement = Arrangement.SpaceBetween,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .clickable { isExpanded.value = !isExpanded.value}
+                    .clickable { isExpanded.value = !isExpanded.value }
             ) {
                 Switch(
                     checked = savedSetting.value,
                     onCheckedChange = {
-                                      scope.launch { dataStore.setSetting(itemNumber, it) }
-                                      savedSetting.value = it
-                                      },
+                        scope.launch { dataStore.setSetting(itemNumber, it) }
+                        savedSetting.value = it
+                    },
                     modifier = Modifier.padding(start = 8.dp)
                 )
                 Text(
-                    text = savedSetting.value.toString() + item.settingName,
+                    text = item.settingName,
                     modifier = Modifier
                         .padding(vertical = 12.dp, horizontal = 5.dp)
                         .fillMaxWidth(),
