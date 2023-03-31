@@ -49,6 +49,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         var array = ArrayList<ItemSettingsRowModel>()
         readAllData.value?.map { item -> item.toItemSettingsRowModel() }
             ?.forEach { item -> array.add(item) }
-        SettingsStorage.addRowSettingRowModels(array)
+        SettingsStorage.updateRowSettingRowModels(array)
     }
 }

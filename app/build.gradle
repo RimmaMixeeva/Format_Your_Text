@@ -57,6 +57,9 @@ android {
 }
 
 dependencies {
+    //SplashScreen
+    implementation 'androidx.core:core-splashscreen:1.0.0-beta02'
+
     implementation "androidx.compose.runtime:runtime-livedata:$compose_version"
     //LiveData
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"

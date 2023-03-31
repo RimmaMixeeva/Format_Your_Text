@@ -4,10 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.formatyourtext.presentation.screens.MainScreen
-import com.example.formatyourtext.presentation.screens.ResultScreen
-import com.example.formatyourtext.presentation.screens.Screen
-import com.example.formatyourtext.presentation.screens.SettingsScreen
+import com.example.formatyourtext.presentation.screens.*
 import com.example.formatyourtext.presentation.viewModel.MainViewModel
 
 @Composable
