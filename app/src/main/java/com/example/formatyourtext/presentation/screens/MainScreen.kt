@@ -7,13 +7,19 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color.Companion.Green
+import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.graphics.Color.Companion.hsl
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
@@ -21,6 +27,8 @@ import androidx.navigation.NavController
 import com.example.formatyourtext.R
 import com.example.formatyourtext.presentation.components.Wallpaper
 import com.example.formatyourtext.presentation.viewModel.MainViewModel
+import com.example.formatyourtext.ui.theme.BackgroundColor
+import com.example.formatyourtext.ui.theme.Orange
 
 @Composable
 fun MainScreen(navController: NavController, mainViewModel: MainViewModel) {
@@ -36,75 +44,80 @@ fun MainScreen(navController: NavController, mainViewModel: MainViewModel) {
         text = it
     }
 
-    Wallpaper(itemId = R.drawable.wallpaper3)
+    // Wallpaper(itemId = R.drawable.wallpaper3)
 
     Column(
         modifier = Modifier
-            .background(hsl(0.35F, 0.45F, 0.82F, 0.6F))
+            .background(BackgroundColor)
             .fillMaxSize()
     )
     {
-        IconButton(onClick = {
-            navController.navigate(Screen.Settings.route)
-        })
-        {
-            Icon(Icons.Filled.Settings, contentDescription = "Настройки")
-        }
-        Text(
-            text = stringResource(R.string.text_for_formatting),
-            textAlign = TextAlign.Center,
+        Box(
             modifier = Modifier
+                .background(Orange)
                 .fillMaxWidth()
-                .padding(bottom = 20.dp),
-            fontSize = 5.em
-        )
+        ) {
+            IconButton(onClick = {
+                navController.navigate(Screen.Settings.route)
+            })
+            {
+                Icon(Icons.Filled.Settings, contentDescription = "Настройки")
+            }
+        }
         TextField(
             value = text,
+            placeholder = { Text(text = "Ваш текст") },
             onValueChange = { newText -> mainViewModel.setNewText(newText) },
             modifier = Modifier
                 .fillMaxWidth()
-                .fillMaxHeight(0.8F)
-                .padding(horizontal = 20.dp)
+                .fillMaxHeight(0.85F)
+                .padding(horizontal = 20.dp, vertical = 50.dp)
         )
 
         Row(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 20.dp),
-            horizontalArrangement = Arrangement.SpaceAround
+                .fillMaxSize()
+                .background(Orange),
+            horizontalArrangement = Arrangement.SpaceAround,
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Button(
-                onClick = {
-                    mainViewModel.setNewText(text + clipboardManager.getText())
-                }
-            ) {
-                Text("Вставить", fontSize = 3.em)
+            IconButton(onClick = {
+                mainViewModel.setNewText(text + clipboardManager.getText())
+            })
+            {
+                Icon(
+                    ImageVector.vectorResource(R.drawable.ic_paste),
+                    contentDescription = "Вставить"
+                )
             }
-            Button(
-                onClick = {
-                    mainViewModel.setNewText("")
-                }
-            ) {
-                Text("Очистить", fontSize = 3.em)
+            IconButton(onClick = {
+                mainViewModel.setNewText("")
+            })
+            {
+                Icon(
+                    ImageVector.vectorResource(R.drawable.ic_clean),
+                    contentDescription = "Очистить"
+                )
             }
-
-            Button(
-                onClick = {
-                    if ((mainViewModel.liveText.value ?: "").isNotBlank()) {
-                        mainViewModel.formatText(navController, mainScreenContext, mainViewModel)
-                    } else {
-                        val toast =
-                            Toast.makeText(
-                                mainScreenContext,
-                                "Заполните пустое поле",
-                                Toast.LENGTH_SHORT
-                            )
-                        toast.setGravity(Gravity.CENTER, 0, 0)
-                        toast.show()
-                    }
+            IconButton(onClick = {
+                if ((mainViewModel.liveText.value ?: "").isNotBlank()) {
+                    mainViewModel.formatText(navController, mainScreenContext, mainViewModel)
+                } else {
+                    val toast =
+                        Toast.makeText(
+                            mainScreenContext,
+                            "Заполните пустое поле",
+                            Toast.LENGTH_SHORT
+                        )
+                    toast.setGravity(Gravity.CENTER, 0, 0)
+                    toast.show()
                 }
-            ) {
-                Text("Форматировать", fontSize = 3.em)
+            })
+            {
+                Icon(
+                    ImageVector.vectorResource(R.drawable.ic_recycle),
+                    contentDescription = "Форматировать"
+                )
             }
         }
     }
