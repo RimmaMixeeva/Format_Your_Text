@@ -5,6 +5,7 @@ data class RegexModel(
     val regexName: String,
     val regexBefore: String,
     val regexAfter: String,
-    val ignoreCase: Boolean,
-    val priority: Int
+    val ignoreCase: Int,
+    val priority: Int,
+    val settingId: Int
 )

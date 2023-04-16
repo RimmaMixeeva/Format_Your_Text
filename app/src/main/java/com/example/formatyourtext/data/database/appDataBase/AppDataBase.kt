@@ -6,10 +6,9 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.formatyourtext.data.database.dao.SettingDao
 import com.example.formatyourtext.data.database.entities.AppRegex
-import com.example.formatyourtext.data.database.entities.RegexToSetting
 import com.example.formatyourtext.data.database.entities.Setting
 
-@Database(entities = [Setting::class, AppRegex::class, RegexToSetting::class], version = 1, exportSchema = false)
+@Database(entities = [Setting::class, AppRegex::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun settingDao(): SettingDao
@@ -18,7 +17,7 @@ abstract class AppDatabase : RoomDatabase() {
         @Volatile
         private var INSTANCE: AppDatabase? = null
 
-        public fun getDbInstance(context: Context): AppDatabase {
+        fun getDbInstance(context: Context): AppDatabase {
             val tempInstance = INSTANCE
             if (tempInstance != null) {
                 return tempInstance
