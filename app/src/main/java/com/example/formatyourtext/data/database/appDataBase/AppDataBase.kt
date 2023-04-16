@@ -5,9 +5,11 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.formatyourtext.data.database.dao.SettingDao
+import com.example.formatyourtext.data.database.entities.AppRegex
+import com.example.formatyourtext.data.database.entities.RegexToSetting
 import com.example.formatyourtext.data.database.entities.Setting
 
-@Database(entities = [Setting::class], version = 1, exportSchema = false)
+@Database(entities = [Setting::class, AppRegex::class, RegexToSetting::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun settingDao(): SettingDao
@@ -25,13 +27,11 @@ abstract class AppDatabase : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     AppDatabase::class.java,
-                    "my_database"
-                ).createFromAsset("my_database").build()
+                    "our_database"
+                ).createFromAsset("our_database.db").fallbackToDestructiveMigration().build()
                 INSTANCE = instance
                 return instance
             }
-
-
         }
 
     }

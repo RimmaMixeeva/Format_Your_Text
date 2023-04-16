@@ -25,7 +25,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.navigation.NavController
 import com.example.formatyourtext.R
-import com.example.formatyourtext.presentation.components.Wallpaper
 import com.example.formatyourtext.presentation.viewModel.MainViewModel
 import com.example.formatyourtext.ui.theme.BackgroundColor
 import com.example.formatyourtext.ui.theme.Orange
@@ -44,7 +43,6 @@ fun MainScreen(navController: NavController, mainViewModel: MainViewModel) {
         text = it
     }
 
-    // Wallpaper(itemId = R.drawable.wallpaper3)
 
     Column(
         modifier = Modifier

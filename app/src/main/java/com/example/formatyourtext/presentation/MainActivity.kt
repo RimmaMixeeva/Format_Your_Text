@@ -20,6 +20,9 @@ class MainActivity : ComponentActivity() {
         mainViewModel.readAllData.observe(this) {
             mainViewModel.fillSettingStorage()
         }
+        mainViewModel.readAllRegex.observe(this) {
+            mainViewModel.fillRegexStorage()
+        }
         setContent {
             navController = rememberNavController()
             SetUpNavGraph(navController = navController, mainViewModel)

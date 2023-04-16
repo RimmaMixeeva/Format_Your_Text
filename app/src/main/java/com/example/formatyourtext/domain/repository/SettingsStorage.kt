@@ -1,4 +1,6 @@
-package com.example.formatyourtext.domain.entity
+package com.example.formatyourtext.domain.repository
+
+import com.example.formatyourtext.domain.entity.ItemSettingsRowModel
 
 object SettingsStorage {
     val rowSettingRowModelList = mutableListOf<ItemSettingsRowModel>()
@@ -7,6 +9,5 @@ object SettingsStorage {
         for (each in items) {
             rowSettingRowModelList.add(each)
         }
-
     }
 }
