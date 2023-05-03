@@ -26,7 +26,8 @@ data class AppRegex(
     @ColumnInfo(name = "ignore_case") val ignoreCase: Int,
     @ColumnInfo(name = "priority") val priority: Int,
     @ColumnInfo(name = "setting_id") val settingId: Int,
-) {
+)
+{
     fun toRegexModel(): RegexModel = RegexModel(
         id = this.id - 1,
         regexName = this.regexName,

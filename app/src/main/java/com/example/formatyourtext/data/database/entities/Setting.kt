@@ -13,7 +13,9 @@ data class Setting(
     @ColumnInfo(name = "setting_name", collate = ColumnInfo.NOCASE) val settingName: String,
     @ColumnInfo(name = "example_before") val exampleBefore: String,
     @ColumnInfo(name = "example_after") val exampleAfter: String,
-) {
+)
+
+{
     fun toItemSettingsRowModel(): ItemSettingsRowModel = ItemSettingsRowModel(
         id = this.id - 1,
         settingName = this.settingName,

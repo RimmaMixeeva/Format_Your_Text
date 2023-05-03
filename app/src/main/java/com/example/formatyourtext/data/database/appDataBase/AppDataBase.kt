@@ -10,9 +10,7 @@ import com.example.formatyourtext.data.database.entities.Setting
 
 @Database(entities = [Setting::class, AppRegex::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
-
     abstract fun settingDao(): SettingDao
-
     companion object {
         @Volatile
         private var INSTANCE: AppDatabase? = null
@@ -27,11 +25,11 @@ abstract class AppDatabase : RoomDatabase() {
                     context.applicationContext,
                     AppDatabase::class.java,
                     "our_database"
-                ).createFromAsset("our_database.db").fallbackToDestructiveMigration().build()
+                ).createFromAsset("our_database.db")
+                    .fallbackToDestructiveMigration().build()
                 INSTANCE = instance
                 return instance
             }
         }
-
     }
 }

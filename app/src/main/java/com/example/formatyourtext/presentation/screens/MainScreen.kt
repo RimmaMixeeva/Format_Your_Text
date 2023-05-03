@@ -7,24 +7,19 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color.Companion.Green
-import androidx.compose.ui.graphics.Color.Companion.White
-import androidx.compose.ui.graphics.Color.Companion.hsl
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.ClipboardManager
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.em
 import androidx.navigation.NavController
 import com.example.formatyourtext.R
+import com.example.formatyourtext.presentation.navigation.Screen
 import com.example.formatyourtext.presentation.viewModel.MainViewModel
 import com.example.formatyourtext.ui.theme.BackgroundColor
 import com.example.formatyourtext.ui.theme.Orange
@@ -33,7 +28,7 @@ import com.example.formatyourtext.ui.theme.Orange
 fun MainScreen(navController: NavController, mainViewModel: MainViewModel) {
 
     val mainScreenContext = LocalContext.current
-    val clipboardManager: androidx.compose.ui.platform.ClipboardManager =
+    val clipboardManager: ClipboardManager =
         LocalClipboardManager.current
 
     var text by remember {

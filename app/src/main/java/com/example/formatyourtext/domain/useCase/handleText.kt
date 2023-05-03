@@ -17,10 +17,8 @@ suspend fun handleText(context: Context, mainViewModel: MainViewModel, repositor
     for (item in storageList) {
         val savedSetting = dataStore.getSetting(item.id)
         if (savedSetting) {
-            Log.i("oiiii", item.id.toString())
         var regexes = RegexStorage.RegexModelList.filter { one -> one.settingId == item.id }.sortedBy { it.priority }
             for (i in 0 until regexes.size) {
-                Log.i("regex before", regexes[i].regexBefore)
                 val text = mainViewModel.liveText.value ?: ""
                 mainViewModel.setNewText(
                         text.replace(

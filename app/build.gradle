@@ -60,8 +60,8 @@ dependencies {
     //SplashScreen
     implementation 'androidx.core:core-splashscreen:1.0.0-beta02'
 
+    //LiveData ViewModel
     implementation "androidx.compose.runtime:runtime-livedata:$compose_version"
-    //LiveData
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
     //Room
@@ -81,6 +81,8 @@ dependencies {
 
     // Alternatively - use the following artifact without an Android dependency.
     implementation("androidx.datastore:datastore-preferences-core:1.0.0")
+    //Navigation
+    implementation "androidx.navigation:navigation-compose:2.5.3"
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation "androidx.compose.ui:ui:$compose_version"
@@ -94,6 +96,6 @@ dependencies {
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_version"
-    implementation "androidx.navigation:navigation-compose:2.5.3"
+
 
 }

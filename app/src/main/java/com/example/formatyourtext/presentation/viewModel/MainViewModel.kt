@@ -2,7 +2,6 @@ package com.example.formatyourtext.presentation.viewModel
 
 import android.app.Application
 import android.content.Context
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -17,7 +16,7 @@ import com.example.formatyourtext.domain.entity.RegexModel
 import com.example.formatyourtext.domain.repository.RegexStorage
 import com.example.formatyourtext.domain.repository.SettingsStorage
 import com.example.formatyourtext.domain.useCase.handleText
-import com.example.formatyourtext.presentation.screens.Screen
+import com.example.formatyourtext.presentation.navigation.Screen
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
