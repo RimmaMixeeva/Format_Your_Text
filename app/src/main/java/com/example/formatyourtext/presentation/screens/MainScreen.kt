@@ -34,6 +34,7 @@ fun MainScreen(navController: NavController, mainViewModel: MainViewModel) {
     var text by remember {
         mutableStateOf(mainViewModel.liveText.value ?: "")
     }
+
     mainViewModel.liveText.observe(LocalContext.current as ComponentActivity) {
         text = it
     }
@@ -94,7 +95,7 @@ fun MainScreen(navController: NavController, mainViewModel: MainViewModel) {
             }
             IconButton(onClick = {
                 if ((mainViewModel.liveText.value ?: "").isNotBlank()) {
-                    mainViewModel.formatText(navController, mainScreenContext, mainViewModel)
+                    mainViewModel.formatText(navController, mainViewModel)
                 } else {
                     val toast =
                         Toast.makeText(

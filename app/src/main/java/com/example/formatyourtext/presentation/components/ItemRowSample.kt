@@ -1,7 +1,6 @@
 package com.example.formatyourtext.presentation.components
 
-import android.content.res.Resources
-import androidx.compose.foundation.Canvas
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -11,34 +10,21 @@ import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.PointMode
-import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
-import com.example.formatyourtext.data.dataStore.DataStoreManager
+import com.example.formatyourtext.data.database.entities.Setting
 import com.example.formatyourtext.domain.entity.ItemSettingsRowModel
+import com.example.formatyourtext.presentation.viewModel.MainViewModel
 import com.example.formatyourtext.ui.theme.*
 import kotlinx.coroutines.launch
 
 @Composable
-fun ItemRowSample(itemNumber: Int, item: ItemSettingsRowModel) {
-    //context
-    val context = LocalContext.current
-    //scope
+fun ItemRowSample(itemNumber: Int, item: ItemSettingsRowModel, viewModel: MainViewModel) {
+
     val scope = rememberCoroutineScope()
-    //datastore info
-    val dataStore = DataStoreManager(context)
-    val savedSetting = remember { mutableStateOf(false) }
-    //get saved state of setting
-    LaunchedEffect(scope) {
-        savedSetting.value = dataStore.getSetting(itemNumber)
-    }
+    val savedSetting = remember { mutableStateOf(if (item.isOn == 1) true else false)}
     val isExpanded = remember { mutableStateOf(false) }
 
     Card(
@@ -71,7 +57,11 @@ fun ItemRowSample(itemNumber: Int, item: ItemSettingsRowModel) {
                         uncheckedTrackColor = DirtyWhite
                     ),
                     onCheckedChange = {
-                        scope.launch { dataStore.setSetting(itemNumber, it) }
+                        scope.launch {
+                            val isOn = if (it) 1 else 0
+                            viewModel.upsertSetting(Setting(itemNumber,item.settingName, item.exampleBefore, item.exampleAfter, isOn))
+                            //dataStore.setSetting(itemNumber, it)
+                            }
                         savedSetting.value = it
                     },
                     modifier = Modifier.fillMaxWidth()

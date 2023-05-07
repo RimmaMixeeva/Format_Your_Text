@@ -13,6 +13,7 @@ data class Setting(
     @ColumnInfo(name = "setting_name", collate = ColumnInfo.NOCASE) val settingName: String,
     @ColumnInfo(name = "example_before") val exampleBefore: String,
     @ColumnInfo(name = "example_after") val exampleAfter: String,
+    @ColumnInfo(name = "isOn") val isOn: Int
 )
 
 {
@@ -20,6 +21,7 @@ data class Setting(
         id = this.id - 1,
         settingName = this.settingName,
         exampleBefore = this.exampleBefore,
-        exampleAfter = this.exampleAfter
+        exampleAfter = this.exampleAfter,
+        isOn = this.isOn
     )
 }

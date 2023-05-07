@@ -26,7 +26,7 @@ fun SetUpNavGraph(
       composable(
           route = Screen.Settings.route
       ) {
-          SettingsScreen(navController)
+          SettingsScreen(navController, viewModel)
       }
   }
 }

@@ -1,6 +1,5 @@
 package com.example.formatyourtext.data.database.repository
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import com.example.formatyourtext.data.database.dao.SettingDao
 import com.example.formatyourtext.data.database.entities.AppRegex
@@ -12,4 +11,7 @@ class SettingRepository(private val settingDao: SettingDao) {
 
     val readAllRegex: LiveData<List<AppRegex>> = settingDao.getAllRegex()
 
+    suspend fun upsertData(setting: Setting) {
+        settingDao.upsertSetting(setting)
+    }
 }

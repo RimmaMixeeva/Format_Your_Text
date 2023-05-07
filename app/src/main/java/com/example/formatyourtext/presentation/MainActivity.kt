@@ -18,10 +18,8 @@ class MainActivity : ComponentActivity() {
         installSplashScreen()
         mainViewModel = ViewModelProvider(this)[MainViewModel::class.java]
         mainViewModel.readAllData.observe(this) {
-            mainViewModel.fillSettingStorage()
         }
         mainViewModel.readAllRegex.observe(this) {
-            mainViewModel.fillRegexStorage()
         }
         setContent {
             navController = rememberNavController()

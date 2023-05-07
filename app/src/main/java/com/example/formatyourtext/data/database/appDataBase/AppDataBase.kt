@@ -1,6 +1,7 @@
 package com.example.formatyourtext.data.database.appDataBase
 
 import android.content.Context
+import android.util.Log
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -8,7 +9,7 @@ import com.example.formatyourtext.data.database.dao.SettingDao
 import com.example.formatyourtext.data.database.entities.AppRegex
 import com.example.formatyourtext.data.database.entities.Setting
 
-@Database(entities = [Setting::class, AppRegex::class], version = 1, exportSchema = false)
+@Database(entities = [Setting::class, AppRegex::class], version = 2, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun settingDao(): SettingDao
     companion object {
@@ -17,7 +18,7 @@ abstract class AppDatabase : RoomDatabase() {
 
         fun getDbInstance(context: Context): AppDatabase {
             val tempInstance = INSTANCE
-            if (tempInstance != null) {
+            if (tempInstance != null)    {
                 return tempInstance
             }
             synchronized(this) {
@@ -25,11 +26,14 @@ abstract class AppDatabase : RoomDatabase() {
                     context.applicationContext,
                     AppDatabase::class.java,
                     "our_database"
-                ).createFromAsset("our_database.db")
+                )
+                    .createFromAsset("our_database")
                     .fallbackToDestructiveMigration().build()
                 INSTANCE = instance
                 return instance
-            }
+            }}
+
+
         }
     }
-}
+

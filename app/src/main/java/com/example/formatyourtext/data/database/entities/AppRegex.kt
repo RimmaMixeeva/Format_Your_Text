@@ -4,7 +4,6 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
-import com.example.formatyourtext.domain.entity.RegexModel
 
 
 @Entity(
@@ -27,14 +26,4 @@ data class AppRegex(
     @ColumnInfo(name = "priority") val priority: Int,
     @ColumnInfo(name = "setting_id") val settingId: Int,
 )
-{
-    fun toRegexModel(): RegexModel = RegexModel(
-        id = this.id - 1,
-        regexName = this.regexName,
-        regexBefore = this.regexBefore,
-        regexAfter = this.regexAfter,
-        ignoreCase = this.ignoreCase,
-        priority = this.priority,
-        settingId = this.settingId - 1
-    )
-}
+

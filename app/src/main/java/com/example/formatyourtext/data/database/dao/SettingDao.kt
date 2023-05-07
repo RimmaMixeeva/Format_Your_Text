@@ -13,4 +13,6 @@ interface SettingDao {
     @Query("SELECT * FROM RegexTable")
     fun getAllRegex(): LiveData<List<AppRegex>>
 
+    @Upsert
+    suspend fun upsertSetting(setting: Setting)
 }
